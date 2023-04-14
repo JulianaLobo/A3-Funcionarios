@@ -6,6 +6,15 @@ public class Funcionario {
     private double valorPorHora;
 
     public Funcionario(String nome, int horasTrabalhadas, double valorPorHora) {
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("Nome inválido");
+        }
+        if (horasTrabalhadas < 1 || horasTrabalhadas > 40) {
+            throw new IllegalArgumentException("Horas trabalhadas inválidas");
+        }
+        if (valorPorHora < 1320 * 0.04 || valorPorHora > 1320 * 0.1) {
+            throw new IllegalArgumentException("Valor por hora inválido");
+        }
         this.nome = nome;
         this.horasTrabalhadas = horasTrabalhadas;
         this.valorPorHora = valorPorHora;
@@ -46,6 +55,9 @@ public class Funcionario {
     }
 
     public void setHorasTrabalhadas(int horasTrabalhadas) {
+        if (horasTrabalhadas < 1 || horasTrabalhadas > 40) {
+            throw new IllegalArgumentException("Horas trabalhadas devem estar entre 1 e 40 horas.");
+        }
         this.horasTrabalhadas = horasTrabalhadas;
     }
 
@@ -54,6 +66,12 @@ public class Funcionario {
     }
 
     public void setValorPorHora(double valorPorHora) {
+        double salarioMinimo = 1320.00;
+        double valorMinimo = salarioMinimo * 0.04;
+        double valorMaximo = salarioMinimo * 0.1;
+        if (valorPorHora < valorMinimo || valorPorHora > valorMaximo) {
+            throw new IllegalArgumentException("Valor da hora inválido.");
+        }
         this.valorPorHora = valorPorHora;
     }
 }
